@@ -1,25 +1,28 @@
-# This workflow will build a Java project with Ant
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
-
-name: Java CI
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main  # Replace with your target branch
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build'
+        required: false
 
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-    - name: Build with Ant
-      run: ant -noinput -buildfile build.xml
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+      - name: Set up Environment
+        run: |
+          # Add your setup commands here
+      - name: Build
+        run: |
+          # Add your build commands here
+      - name: Deploy
+        run: |
+          # Add your deployment commands here
