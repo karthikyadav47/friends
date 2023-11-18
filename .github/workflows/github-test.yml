@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Replace with your target branch
+      - test  # Replace with your target branch
   workflow_dispatch:
     inputs:
       tag:
